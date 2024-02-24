@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private float movePower = 1f;
     [SerializeField] private float PushingPower = 1f;
-    [SerializeField] private Vector3 PushingForce = new Vector3(0,0,1);
+    [SerializeField] private Vector3 PushingForce = new Vector3(0,-1,1);
     void Start()
     {
         rb = GetComponent<Rigidbody>();
