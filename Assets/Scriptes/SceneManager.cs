@@ -1,12 +1,22 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class SceneManager : MonoBehaviour
 {
-    
-    public void SceneLevels()
+    public int currentLevel;
+    private AudioManager audioManager;
+    private void Start()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Levels");
+        DontDestroyOnLoad(gameObject);
+        audioManager = GetComponent<AudioManager>();
+        audioManager.Play("Background menu");
     }
+    public void LoadSceneLevel(int id)
+    {
+        currentLevel = id;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Level " + id);
+    }
+    
     public void OpenSettings(GameObject obj)
     {
         obj.SetActive(true);
@@ -14,14 +24,5 @@ public class SceneManager : MonoBehaviour
     public void CancelSettings(GameObject obj)
     {
         obj.SetActive(false);
-    }
-    public void PlayLevel(int i)
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Level " + i);
-    }
-    public void RandomPlayLevel()
-    {
-        int randomLevel = Random.Range(1,10);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Level " + randomLevel);
     }
 }
