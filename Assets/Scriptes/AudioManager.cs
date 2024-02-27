@@ -5,12 +5,10 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 public class AudioManager : MonoBehaviour
 {
+    public AudioMixer audioMixer;
     public Sound [] sounds;
     public static AudioManager instance;
-    [SerializeField]
-    private AudioMixerGroup audioMixerGroup;
-    [SerializeField]
-    public AudioMixer audioMixer;
+    [SerializeField] 
     private void Awake() {
         if(instance == null)
         {
@@ -29,9 +27,9 @@ public class AudioManager : MonoBehaviour
            s.source.volume = s.volume;
            s.source.pitch = s.pitch;
            s.source.loop = s.loop;
-           s.source.outputAudioMixerGroup = audioMixerGroup;
+           s.source.outputAudioMixerGroup = s.audioMixerGroup;
         }
-        audioMixer.SetFloat("_musicVolume",20f);
+        audioMixer.SetFloat("_music",20f);
     }
     public void Play(string name)
     {

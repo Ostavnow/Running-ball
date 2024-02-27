@@ -10,6 +10,8 @@ public class SetValueAudio : MonoBehaviour
     private Slider scroller;
     private const float disableVolume = -80f;
     private const float minimumVolume = -30f;
+    [SerializeField]
+    private string nameGroups;
     private void Start()
     {
         audioMixer = FindObjectOfType<AudioManager>().audioMixer;
@@ -19,11 +21,11 @@ public class SetValueAudio : MonoBehaviour
     {
         float volumeValue = Mathf.Lerp(minimumVolume,0,scroller.value);
         if(scroller.value == 0f)
-            audioMixer.SetFloat("_musicVolume",disableVolume);
+            audioMixer.SetFloat(nameGroups,disableVolume);
         else
         {
 
-            audioMixer.SetFloat("_musicVolume",volumeValue);
+            audioMixer.SetFloat(nameGroups,volumeValue);
         }
     }
 }

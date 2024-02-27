@@ -28,4 +28,8 @@ public class UI : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Levels");
     }
+    public void ButtonSoundEffect()
+    {
+        audioManager.Play("Button");
+    }
 }

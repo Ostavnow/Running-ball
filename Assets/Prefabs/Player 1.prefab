@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movePower: 20
-  PushingPower: 20
+  pushingPower: 20
   PushingForce: {x: 0, y: -1, z: 1}
 --- !u!114 &971557977152638134
 MonoBehaviour:
@@ -178,3 +178,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb9ce7e6315d4554c834db760ca9fe0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textCountMoney: {fileID: 0}

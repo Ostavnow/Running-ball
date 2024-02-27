@@ -2,35 +2,29 @@ using System.Collections;
 using System.Linq.Expressions;
 using UnityEngine;
 
-public class GameOverAnimation : MonoBehaviour
+public abstract class GameOverAnimation : MonoBehaviour
 {
     [SerializeField]
-    private AnimationClip gameOverAnimation;
+    protected AnimationClip gameOverAnimation;
     [SerializeField]
-    private ParticleSystem particleSystem;
-    private Animator animation;
+    protected ParticleSystem particleSystem;
+    protected Animator animation;
     [SerializeField]
-    private GameObject panelGameOver;
+    protected GameObject panelGameOver;
+    protected AudioManager audioManager;
+    private bool isActive = true;
     private void Start()
     {
         animation = FindObjectOfType<PlayerController>().GetComponent<Animator>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
     public void PlayGameOverAnimation()
     {
-        StartCoroutine(PlayGameOverAnimationCorutine());
-    }
-    private IEnumerator PlayGameOverAnimationCorutine()
-    {
-        animation.Play(gameOverAnimation.name);
-        FindObjectOfType<PlayerController>().GetComponent<Rigidbody>().isKinematic = true;
-        // particleSystem.Play();
-        yield return new WaitForSeconds(0.5f);
-        try
+        if(isActive)
         {
-            panelGameOver.SetActive(true);
+            isActive = false;
+            StartCoroutine(PlayGameOverAnimationCorutine());
         }
-        catch(UnassignedReferenceException e)
-        {}
-        
     }
+    protected abstract IEnumerator PlayGameOverAnimationCorutine();
 }

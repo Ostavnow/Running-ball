@@ -8,8 +8,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveInput;
     private Rigidbody rb;
     [SerializeField] private float movePower = 1f;
-    [SerializeField] private float PushingPower = 1f;
+    [SerializeField] private float pushingPower = 1f;
     [SerializeField] private Vector3 PushingForce = new Vector3(0,-1,1);
+    private bool controllable = true;
     public event Action GameOver;
     public event Action Finish;
     public event Action TookMoney;
@@ -20,8 +21,11 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.AddForce(moveInput * movePower,ForceMode.Impulse);
-        rb.velocity = PushingForce * PushingPower;
+        if(controllable)
+        {
+            rb.AddForce(moveInput * movePower,ForceMode.Impulse);
+            rb.velocity = PushingForce * pushingPower;
+        }
     }
     public void HandlerButtonDown(float direction)
     {
@@ -35,11 +39,14 @@ public class PlayerController : MonoBehaviour
     {
         if(other.GetComponent<Obstacles>())
         {
-            GameOver.Invoke();
+            GameOver?.Invoke();
+            other.GetComponent<Obstacles>().PlayGameOverAnimation();
+            controllable = false;
         }
         else if(other.CompareTag("Finish"))
         {
             Finish?.Invoke();
+            controllable = false;
         }
         else if(other.CompareTag("Money"))
         {
