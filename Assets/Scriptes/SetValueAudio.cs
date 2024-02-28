@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,10 +13,11 @@ public class SetValueAudio : MonoBehaviour
     private const float minimumVolume = -30f;
     [SerializeField]
     private string nameGroups;
-    private void Start()
+    private void Awake()
     {
         audioMixer = FindObjectOfType<AudioManager>().audioMixer;
         scroller = GetComponent<Slider>();
+        scroller.value = GetMixerVolume();
     }
     public void SetVolume()
     {
@@ -27,5 +29,13 @@ public class SetValueAudio : MonoBehaviour
 
             audioMixer.SetFloat(nameGroups,volumeValue);
         }
+    }
+    private float GetMixerVolume()
+    {
+        audioMixer.GetFloat(nameGroups, out float currentVolume);
+        if(currentVolume == minimumVolume)
+        return 0;
+        else
+            return Mathf.Lerp(1,0, currentVolume / minimumVolume);
     }
 }

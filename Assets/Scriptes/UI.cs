@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class UI : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject canvasMenu;
+    [SerializeField]
+    private GameObject canvasLevels;
     private AudioManager audioManager;
     private void Start()
     {
@@ -24,12 +28,22 @@ public class UI : MonoBehaviour
         audioManager.StopAll();
         audioManager.Play("Background menu");
     }
-    public void OpenSceneLevels()
+    public void OpenWindowLevels()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Levels");
+        canvasMenu.SetActive(false);
+        canvasLevels.SetActive(true);
+    }
+    public void CancelWindowLevels()
+    {
+        canvasMenu.SetActive(true);
+        canvasLevels.SetActive(false);
     }
     public void ButtonSoundEffect()
     {
         audioManager.Play("Button");
+    }
+    public void ExitApplication()
+    {
+        Application.Quit();
     }
 }

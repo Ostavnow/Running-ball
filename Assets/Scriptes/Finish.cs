@@ -12,16 +12,28 @@ public class Finish : MonoBehaviour
     private TMP_Text moneyText;
     private MoneyCounter moneyCounter;
     private AudioManager audioManager;
+    private PlayerController playerController;
+    private SceneManager sceneManager;
+    private DataManager dataManager;
     private void Start()
     {
+        playerController = FindObjectOfType<PlayerController>();
+        playerController.Finish += MethodFinish;
         moneyCounter = FindObjectOfType<MoneyCounter>();
-        FindObjectOfType<PlayerController>().Finish += MethodFinish;
         audioManager = FindObjectOfType<AudioManager>();
-    }
+        sceneManager = FindObjectOfType<SceneManager>();
+        dataManager = FindObjectOfType<DataManager>();
+    } 
     private void MethodFinish()
     {
+        if(sceneManager.currentLevel == sceneManager.avalibleLevels)
+            sceneManager.avalibleLevels++;
+        int amountMoney = dataManager.ProgressInfoPlayer.AmountMoney + moneyCounter.CountMoney;
+        int numberLevelsСompleted = sceneManager.avalibleLevels;
+        IProgressInfo playerProgress = new PlayerProgressInfo(numberLevelsСompleted,amountMoney);
+        dataManager.SaveProgress(playerProgress);
         panelFinishUI.SetActive(true);
-        FindObjectOfType<PlayerController>().GetComponent<Rigidbody>().isKinematic = true;
+        playerController.GetComponent<Rigidbody>().isKinematic = true;
         StartCoroutine(AnimatePlayer());
         moneyText.text = moneyCounter.CountMoney.ToString();
         audioManager.Play("Finish");

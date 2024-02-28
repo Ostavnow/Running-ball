@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Money
+  - Menu canvas
+  - Levels canvas
   layers:
   - Default
   - TransparentFX

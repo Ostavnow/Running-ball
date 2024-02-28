@@ -29,7 +29,6 @@ public class AudioManager : MonoBehaviour
            s.source.loop = s.loop;
            s.source.outputAudioMixerGroup = s.audioMixerGroup;
         }
-        audioMixer.SetFloat("_music",20f);
     }
     public void Play(string name)
     {
