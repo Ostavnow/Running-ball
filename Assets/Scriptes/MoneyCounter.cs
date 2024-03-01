@@ -8,17 +8,25 @@ public class MoneyCounter : MonoBehaviour
     public int CountMoney{private set; get;}
     [SerializeField]
     private TMP_Text textCountMoney;
-    private AudioManager audioManager;
+    
     void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
         GetComponent<PlayerController>().TookMoney += TookMoney;
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Money"))
+        {
+            TookMoney();
+            other.GetComponent<AudioSource>().Play();
+            SpriteRenderer sprite = other.GetComponent<SpriteRenderer>();
+            sprite.enabled = false;
+            Destroy(other.gameObject,0.5f);
+        }
+    }
     private void TookMoney()
     {
         CountMoney++;
         textCountMoney.text = CountMoney.ToString();
-        audioManager.Play("Took money");
     }
 }

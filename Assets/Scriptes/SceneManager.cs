@@ -18,13 +18,5 @@ public class SceneManager : MonoBehaviour
         currentLevel = id;
         UnityEngine.SceneManagement.SceneManager.LoadScene("Level " + id);
     }
-    
-    public void OpenSettings(GameObject obj)
-    {
-        obj.SetActive(true);
-    }
-    public void CancelSettings(GameObject obj)
-    {
-        obj.SetActive(false);
-    }
+
 }

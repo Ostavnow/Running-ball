@@ -15,6 +15,7 @@ public class Finish : MonoBehaviour
     private PlayerController playerController;
     private SceneManager sceneManager;
     private DataManager dataManager;
+    private CameraAnimation cameraAnimation;
     private void Start()
     {
         playerController = FindObjectOfType<PlayerController>();
@@ -23,6 +24,7 @@ public class Finish : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         sceneManager = FindObjectOfType<SceneManager>();
         dataManager = FindObjectOfType<DataManager>();
+        cameraAnimation = FindObjectOfType<CameraAnimation>();
     } 
     private void MethodFinish()
     {
@@ -36,13 +38,15 @@ public class Finish : MonoBehaviour
         playerController.GetComponent<Rigidbody>().isKinematic = true;
         StartCoroutine(AnimatePlayer());
         moneyText.text = moneyCounter.CountMoney.ToString();
+        FindObjectOfType<FollowCamera>().enabled = false;
+        cameraAnimation.PlayAnimation();
         audioManager.Play("Finish");
     }
     private IEnumerator AnimatePlayer()
     {
         Transform playerTransform = FindObjectOfType<PlayerController>().transform;
         Vector3 startPosition = playerTransform.position;
-        Vector3 endPosition = new Vector3(transform.position.x + 3f,transform.position.y + 0.5f,transform.position.z);
+        Vector3 endPosition = new Vector3(transform.position.x + 4.7f,transform.position.y + 0.5f,transform.position.z);
         while(playerTransform.position.z + 5 < transform.position.z)
         {
             playerTransform.position = Vector3.Lerp(playerTransform.position,endPosition,Time.deltaTime / 1f);

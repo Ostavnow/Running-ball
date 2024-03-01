@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class PlayerController : MonoBehaviour
         if(controllable)
         {
             rb.AddForce(moveInput * movePower,ForceMode.Impulse);
-            rb.velocity = PushingForce * pushingPower;
+            rb.velocity = new Vector3(rb.velocity.x,rb.velocity.y + PushingForce.y * pushingPower,PushingForce.z * pushingPower);
         }
     }
     public void HandlerButtonDown(float direction)
@@ -51,7 +52,6 @@ public class PlayerController : MonoBehaviour
         else if(other.CompareTag("Money"))
         {
             TookMoney?.Invoke();
-            Destroy(other.gameObject);
         }
     }
 }
