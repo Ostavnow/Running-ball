@@ -8,34 +8,42 @@ public class GameOverHoleAnimation : GameOverAnimation
     [SerializeField]
     private float suctionForce;
     private float radius;
-    // private void Start()
-    // {
-    //     radius = GetComponent<SphereCollider>().radius;
-    // }
+    private static bool isPullPlayer = false;
+    private void Start()
+    {
+        base.Start();
+        radius = GetComponent<SphereCollider>().radius;
+        isPullPlayer = false;
+    }
     protected override IEnumerator PlayGameOverAnimationCorutine()
     {
-        animation.Play(gameOverAnimation.name);
-        audioManager.Play("GameOver");
         Transform playerTransform = FindObjectOfType<PlayerController>().transform;
-        Vector3 endPos = new Vector3(transform.position.x,transform.position.y - 1,transform.position.z);
-        yield return new WaitForSeconds(0.3f);
-        playerTransform.GetComponent<Rigidbody>().isKinematic = true;
-        animation.Play(gameOverAnimation.name);
-        while(playerTransform.position.y > endPos.y + 0.3f)
+        Rigidbody playerRb = playerTransform.GetComponent<Rigidbody>();
+        if(playerRb.isKinematic == false)
         {
-        if(playerTransform.position.y > endPos.y/2)
-            playerTransform.position = Vector3.Lerp(playerTransform.position,endPos,Time.deltaTime / 1f);
-        else if(playerTransform.position.y > endPos.y)
-            playerTransform.position = Vector3.Lerp(playerTransform.position,endPos,Time.deltaTime / 3f);
-        yield return null;
+            Debug.Log("dfdfdfd");
+            animation.Play(gameOverAnimation.name);
+            audioManager.Play("GameOver");
+            Vector3 endPos = new Vector3(transform.position.x,transform.position.y - 1,transform.position.z);
+            yield return new WaitForSeconds(0.3f);
+            playerRb.isKinematic = true;
+            animation.Play(gameOverAnimation.name);
+            while(playerTransform.position.y > endPos.y + 0.3f)
+            {
+                if(playerTransform.position.y > endPos.y/2)
+                    playerTransform.position = Vector3.Lerp(playerTransform.position,endPos,Time.deltaTime / 1f);
+                else if(playerTransform.position.y > endPos.y)
+                    playerTransform.position = Vector3.Lerp(playerTransform.position,endPos,Time.deltaTime / 3f);
+                yield return null;
+            }
+            panelGameOver.SetActive(true); 
         }
-        panelGameOver.SetActive(true);
+        
     }
     private void OnTriggerStay(Collider other)
     {
         if(other.GetComponent<PlayerController>())
         {
-            Debug.Log("Притягиваем игрока");
             other.GetComponent<Rigidbody>().AddExplosionForce(-suctionForce,transform.position,3);
         }
     }

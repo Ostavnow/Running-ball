@@ -13,7 +13,7 @@ public abstract class GameOverAnimation : MonoBehaviour
     protected GameObject panelGameOver;
     protected AudioManager audioManager;
     private bool isActive = true;
-    private void Start()
+    protected void Start()
     {
         animation = FindObjectOfType<PlayerController>().GetComponent<Animator>();
         audioManager = FindObjectOfType<AudioManager>();

@@ -7,10 +7,12 @@ public class PlayerUIHundler : MonoBehaviour
     private SceneManager sceneManager;
     [SerializeField]
     private TMP_Text levelText;
+    private AudioManager audioManager;
     private void Start()
     {
         sceneManager = FindObjectOfType<SceneManager>();
-        levelText.text = "Level " + sceneManager.currentLevel.ToString();
+        levelText.text = "Level " + sceneManager.fakeCurrentLevel.ToString();
+        audioManager = FindObjectOfType<AudioManager>();
     }
     public void Pause(GameObject obj)
     {
@@ -25,6 +27,8 @@ public class PlayerUIHundler : MonoBehaviour
     public void ExitPause()
     {
         Time.timeScale = 1;
+        audioManager.StopAll();
+        audioManager.Play("Background menu");
         UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
     }
     public void NextLevel()

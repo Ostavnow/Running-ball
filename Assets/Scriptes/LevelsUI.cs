@@ -23,9 +23,13 @@ public class LevelsUI : MonoBehaviour
         audioManager.Play("Background game");
         sceneManager.LoadSceneLevel(i);
     }
-    public void RandomPlayLevel()
+    public void RandomPlayLevel(int i)
     {
+        sceneManager.fakeCurrentLevel = i;
         int randomLevel = Random.Range(1,10);
+        sceneManager.currentLevel = randomLevel;
+        audioManager.StopAll();
+        audioManager.Play("Background game");
         UnityEngine.SceneManagement.SceneManager.LoadScene("Level " + randomLevel);
     }
     private void UpdatesAvailableLevelButtons()

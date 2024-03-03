@@ -8,11 +8,6 @@ public class MoneyCounter : MonoBehaviour
     public int CountMoney{private set; get;}
     [SerializeField]
     private TMP_Text textCountMoney;
-    
-    void Start()
-    {
-        GetComponent<PlayerController>().TookMoney += TookMoney;
-    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Money"))

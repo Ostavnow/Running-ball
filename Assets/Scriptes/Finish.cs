@@ -16,6 +16,7 @@ public class Finish : MonoBehaviour
     private SceneManager sceneManager;
     private DataManager dataManager;
     private CameraAnimation cameraAnimation;
+    private int numberCalls = 0;
     private void Start()
     {
         playerController = FindObjectOfType<PlayerController>();
@@ -28,8 +29,15 @@ public class Finish : MonoBehaviour
     } 
     private void MethodFinish()
     {
-        if(sceneManager.currentLevel == sceneManager.avalibleLevels)
+        if(numberCalls == 0)
+        {
+        numberCalls++;
+        if(sceneManager.fakeCurrentLevel == sceneManager.avalibleLevels)
+        {
             sceneManager.avalibleLevels++;
+        }
+        sceneManager.fakeCurrentLevel++;
+        Debug.Log(gameObject.name);
         int amountMoney = dataManager.ProgressInfoPlayer.AmountMoney + moneyCounter.CountMoney;
         int numberLevelsСompleted = sceneManager.avalibleLevels;
         IProgressInfo playerProgress = new PlayerProgressInfo(numberLevelsСompleted,amountMoney);
@@ -41,6 +49,8 @@ public class Finish : MonoBehaviour
         FindObjectOfType<FollowCamera>().enabled = false;
         cameraAnimation.PlayAnimation();
         audioManager.Play("Finish");
+        }
+       
     }
     private IEnumerator AnimatePlayer()
     {
@@ -49,7 +59,7 @@ public class Finish : MonoBehaviour
         Vector3 endPosition = new Vector3(transform.position.x + 4.7f,transform.position.y + 0.5f,transform.position.z);
         while(playerTransform.position.z + 5 < transform.position.z)
         {
-            playerTransform.position = Vector3.Lerp(playerTransform.position,endPosition,Time.deltaTime / 1f);
+            playerTransform.position = Vector3.Lerp(playerTransform.position,endPosition,Time.deltaTime);
             yield return null;
         }
     }
