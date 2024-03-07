@@ -6860,6 +6860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 3, z: -8}
+  speed: 20
 --- !u!1001 &989984439
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13432,7 +13433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7662438170273129074, guid: b0ce3e3f9c0c6da4ca62da80f590b49e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 154.46489
+      value: 153.71
       objectReference: {fileID: 0}
     - target: {fileID: 7662438170273129074, guid: b0ce3e3f9c0c6da4ca62da80f590b49e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16351,7 +16352,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &2098053026 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7313045665390509671, guid: 1402472550c18cd4485763e7d279997b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 3878881392704498385, guid: 1402472550c18cd4485763e7d279997b, type: 3}
   m_PrefabInstance: {fileID: 2098053023}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
