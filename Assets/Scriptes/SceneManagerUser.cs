@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class SceneManager : MonoBehaviour
+public class SceneManagerUser : MonoBehaviour
 {
     public int avalibleLevels;
     public int currentLevel;

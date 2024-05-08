@@ -4,13 +4,13 @@ using TMPro;
 using UnityEngine;
 public class PlayerUIHundler : MonoBehaviour
 {
-    private SceneManager sceneManager;
+    private SceneManagerUser sceneManager;
     [SerializeField]
     private TMP_Text levelText;
     private AudioManager audioManager;
     private void Start()
     {
-        sceneManager = FindObjectOfType<SceneManager>();
+        sceneManager = FindObjectOfType<SceneManagerUser>();
         levelText.text = "Level " + sceneManager.fakeCurrentLevel.ToString();
         audioManager = FindObjectOfType<AudioManager>();
     }

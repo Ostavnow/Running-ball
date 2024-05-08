@@ -52,5 +52,6 @@
         "Temp/": true
     },
     "dotnet.preferCSharpExtension": true,
-    "dotnet.defaultSolution": "Running ball.sln"
+    "dotnet.defaultSolution": "Running ball.sln",
+    "CodeGPT.apiKey": "Cohere"
 }

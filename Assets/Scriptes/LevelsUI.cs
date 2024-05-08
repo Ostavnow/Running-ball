@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class LevelsUI : MonoBehaviour
 {
-    private SceneManager sceneManager;
+    private SceneManagerUser sceneManager;
     private AudioManager audioManager;
     [SerializeField]
     private Transform levelButtonGroup;
     private DataManager dataManager;
     private void Start()
     {
-        sceneManager = FindObjectOfType<SceneManager>();
+        sceneManager = FindObjectOfType<SceneManagerUser>();
         audioManager = FindObjectOfType<AudioManager>();
         dataManager = FindObjectOfType<DataManager>();
         UpdatesAvailableLevelButtons();

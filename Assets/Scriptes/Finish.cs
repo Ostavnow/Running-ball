@@ -13,7 +13,7 @@ public class Finish : MonoBehaviour
     private MoneyCounter moneyCounter;
     private AudioManager audioManager;
     private PlayerController playerController;
-    private SceneManager sceneManager;
+    private SceneManagerUser sceneManager;
     private DataManager dataManager;
     private CameraAnimation cameraAnimation;
     private int numberCalls = 0;
@@ -23,7 +23,7 @@ public class Finish : MonoBehaviour
         playerController.Finish += MethodFinish;
         moneyCounter = FindObjectOfType<MoneyCounter>();
         audioManager = FindObjectOfType<AudioManager>();
-        sceneManager = FindObjectOfType<SceneManager>();
+        sceneManager = FindObjectOfType<SceneManagerUser>();
         dataManager = FindObjectOfType<DataManager>();
         cameraAnimation = FindObjectOfType<CameraAnimation>();
     } 

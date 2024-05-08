@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-public class HundlerButtonPlayer : MonoBehaviour, IPointerDownHandler , IPointerUpHandler
+public class PlayerDirectionButtonРandler : MonoBehaviour, IPointerDownHandler , IPointerUpHandler
 {
     private PlayerController playerController;
     private event Action OnPointerUpButton;
